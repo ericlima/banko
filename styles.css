@@ -1,0 +1,116 @@
+body {
+font-family:Arial, Helvetica, sans-serif;
+font-size:16px;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+background-color: rgb(52, 72, 99);
+color: white;
+}
+
+h1 {
+font-family:Lucida, Helvetica, sans-serif;
+font-size:36px;
+color: white;
+margin-top: 20px;
+text-align: center;	
+}
+
+
+.entrada {
+    position: absolute;
+    margin-left: 80px;
+}
+
+.big_text {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:26px;
+}
+
+.medium_text {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:20px;
+}
+
+
+.font_black {
+    color: black;
+}
+
+#div_botao {   
+    text-align: center;
+}
+
+div.message {
+    background-color: lightcyan;
+    border-radius: 3px;
+    border-style:single;
+    box-shadow: 2px 2px 2px black;
+    padding: 10px;
+    position:relative; 
+    margin:auto; 
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+input.campo {
+    width: 200px;
+    border-radius: 6px;
+}
+
+.auth_div {
+    width: 400px;
+    height: 200px;
+    background-color: rgb(121, 141, 141);
+    border-radius: 10px;
+    border-style:single;
+    box-shadow: 10px 10px 5px black;
+
+    position:absolute; /*it can be fixed too*/
+    left:0; right:0;
+    top:0; bottom:0;
+    margin:auto;
+    
+    padding-top: 25px;
+
+    text-align: center;
+        
+      
+
+}
+
+.box {
+    border:#666666 solid 1px;
+}
+
+label2 {
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+}
+
+.wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+.logo {
+    overflow: hidden;
+    text-align: left;
+    position: relative;
+    height: 60px;
+    background-color: white;
+    color: #1F6C8B;
+    font-family: Arial;
+}
+
+.red_background {
+    background-color: rgb(206, 106, 106);
+}
