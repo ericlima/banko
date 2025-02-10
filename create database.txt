@@ -67,7 +67,7 @@ CREATE TABLE `utilizadores` (
 
 LOCK TABLES `utilizadores` WRITE;
 /*!40000 ALTER TABLE `utilizadores` DISABLE KEYS */;
-INSERT INTO `utilizadores` VALUES (1,'Carlos Costa','ccosta@gmail.com','969969969','Castelo Branco','elefante'),(2,'Maria Silva','msilva@yahoo.com','912123123','Viseu','tigre');
+INSERT INTO `utilizadores` VALUES (1,'Carlos Costa','ccosta@gmail.com','969969969','Castelo Branco',SHA2('elefante',256)),(2,'Maria Silva','msilva@yahoo.com','912123123','Viseu',SHA2('tigre',256));
 /*!40000 ALTER TABLE `utilizadores` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
