@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // se não foi enviado o parametro email, volta para a página de login
-if ( empty($_GET['email'] ) ) {
+if ( empty($_POST['email'] ) ) {
   header('Location: index.html');
   die();
 }
