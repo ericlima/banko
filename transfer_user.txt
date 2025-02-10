@@ -1,0 +1,3 @@
+CREATE USER 'transfer_user'@'localhost' IDENTIFIED BY 'senha_segura';
+GRANT INSERT ON clientes.transferencias TO 'transfer_user'@'localhost';
+FLUSH PRIVILEGES;
