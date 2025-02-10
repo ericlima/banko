@@ -17,7 +17,7 @@ $db = "clientes";
 
 
 // se não foi enviado o parametro senha, ou a sessão não tem o email, volta para a página de login
-if ( empty($_GET['senha']) || empty($_SESSION['email']) ) {
+if ( empty($_POST['senha']) || empty($_SESSION['email']) ) {
   header('Location: index.html');
   die();
 }
