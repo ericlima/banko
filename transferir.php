@@ -8,6 +8,9 @@ error_reporting(E_ALL);
 // Iniciar a sessao
 session_start();
 
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Gera um token seguro
+}
 
 // se não está logado, volta para a página de login
 if ( empty($_SESSION['logado']) || $_SESSION['logado'] != true) {
@@ -42,8 +45,10 @@ if ( empty($_SESSION['logado']) || $_SESSION['logado'] != true) {
 <h1>Indique os dados para transferência bancária</h1>
 
 <div class="center" id='conteudo'>
-    <form action="processar_transferencia.php" method="get" enctype="multipart/form-data">
+    <form action="processar_transferencia.php" method="POST" enctype="multipart/form-data">
 
+      <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+      
       <p><label2 class="medium_text">Nome do destinatário: </label2> <input class="campo medium_text" type="text" id="nome" name="nome"> 
        
       <p><label2 class="medium_text">Número de conta bancária: </label2> <input class="campo medium_text" type="text" id="conta" name="conta"> 

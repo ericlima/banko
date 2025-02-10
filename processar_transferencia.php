@@ -8,6 +8,12 @@ error_reporting(E_ALL);
 // Iniciar a sessao
 session_start();
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+      die("Erro: Requisição inválida (CSRF detectado).");
+      header('Location: index.html');
+  }
+}
 
 // Parâmetros da ligação à base de dados MySQL
 $dbhost = "localhost";
@@ -23,14 +29,14 @@ if ( empty($_SESSION['logado']) || $_SESSION['logado'] != true) {
 }
 
 // se faltar algum parãmetro, volta para a página de transferência
-if ( empty($_GET['nome']) || empty($_GET['conta']) || empty($_GET['valor'])) {
+if ( empty($_POST['nome']) || empty($_POST['conta']) || empty($_POST['valor'])) {
   header('Location: transferir.php');
   die();
 }
 
-$nome = $_GET['nome'];
-$conta = $_GET['conta'];
-$valor = $_GET['valor'];
+$nome = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
+$conta = htmlspecialchars($_POST['conta'], ENT_QUOTES, 'UTF-8');
+$valor = htmlspecialchars($_POST['valor'], ENT_QUOTES, 'UTF-8');
 
 // Ligar à base de dados
 $conn = new mysqli($dbhost, $dbuser, $dbpass,$db)
