@@ -1,9 +1,9 @@
 atenção
 
 deve atualizar o campo senha da tabela de utilizadores
-
+==========================================================================
 update clientes.utilizadores set senha = SHA2(senha, 256)
-
+==========================================================================
 
 para o requisito de privilegio minimo:
 ==========================================================================
