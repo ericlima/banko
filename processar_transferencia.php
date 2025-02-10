@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 // Parâmetros da ligação à base de dados MySQL
 $dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "aluno123";
+$dbuser = "transfer_user";
+$dbpass = "senha_segura";
 $db = "clientes";
 
 
