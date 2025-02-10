@@ -39,12 +39,12 @@ $senha = htmlspecialchars($senha,ENT_QUOTES,'UTF-8');
 $email = htmlspecialchars($email,ENT_QUOTES,'UTF-8');
 
 // Construir a query
-$sqlQuery="SELECT senha FROM clientes.utilizadores WHERE email= ? ";
-
+$stmt = $conn->prepare('SELECT senha FROM clientes.utilizadores WHERE email= ? ;');
 $stmt->bind_param('s', $email);
 
-// Fazer a query
-$result = $conn->query($sqlQuery);
+$stmt->execute();
+
+$result = $stmt->get_result();
 
 // obtem a hash da senha do utilizador
 if ($result->num_rows == 0) {
