@@ -60,7 +60,8 @@ $senhaHash = hash('sha256', $senha);
 // Se a senha do utilizador não está correta, volta para a página de login
 if ($senhaBd != $senhaHash) {
   $conn -> close();
-  header('Location: index.html');
+  echo "Senha incorreta" . $senhaBd . " " . $senhaHash;
+  //header('Location: index.html');
   die();  
 }
 
