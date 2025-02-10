@@ -24,18 +24,14 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass,$db)
 
 
 // Extrair o email dos parâmetros que foram enviados para o script
-$email = $_GET['email'];
+
+$email = mysqli_real_escape_string($conn, $_POST['email']);
 
 $stmt = $conn->prepare('SELECT * FROM clientes.utilizadores WHERE email= ? ;');
 $stmt->bind_param('s', $email);
 
 $stmt->execute();
 
-// Construir a query
-//$sqlQuery="SELECT * FROM clientes.utilizadores WHERE email='$email';";
-	
-// Fazer a query
-//$result = $conn->query($sqlQuery);
 $result = $stmt->get_result();
 
 // Se não há nenhum utilizador com aquele email, volta para a página de login
@@ -75,7 +71,7 @@ $_SESSION['nome_do_utilizador'] = $nome_do_utilizador;
 
 <div class="auth_div" id='conteudo'>
     
-    <form action="login.php" method="get" enctype="multipart/form-data">
+    <form action="login.php" method="POST" enctype="multipart/form-data">
    
       <p><label class="big_text">Senha</label></p>
       <input class="box big_text font_black" type="password" id="senha" name="senha">

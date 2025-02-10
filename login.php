@@ -29,7 +29,9 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass,$db)
 
 
 // Extrair a senha dos parâmetros que foram enviados para o script
-$senha= $_GET['senha'];
+
+$senha = mysqli_real_escape_string($conn, $_POST['senha']);
+
 // Extrair o email da sessão
 $email = $_SESSION['email'];
 
@@ -37,13 +39,26 @@ $senha = htmlspecialchars($senha,ENT_QUOTES,'UTF-8');
 $email = htmlspecialchars($email,ENT_QUOTES,'UTF-8');
 
 // Construir a query
-$sqlQuery="SELECT * FROM clientes.utilizadores WHERE email='$email' AND senha='$senha';";
-	
+$sqlQuery="SELECT senha FROM clientes.utilizadores WHERE email= ? ";
+
+$stmt->bind_param('s', $email);
+
 // Fazer a query
 $result = $conn->query($sqlQuery);
 
-// Se a senha do utilizador não está correta, volta para a página de login
+// obtem a hash da senha do utilizador
 if ($result->num_rows == 0) {
+  $conn -> close();
+  header('Location: index.html');
+  die();  
+}
+
+$row = $result->fetch_assoc();
+$senhaBd = $row['senha'];
+$senhaHash = hash('sha256', $senha);
+
+// Se a senha do utilizador não está correta, volta para a página de login
+if ($senhaBd != $senhaHash) {
   $conn -> close();
   header('Location: index.html');
   die();  
