@@ -44,12 +44,12 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass,$db)
 
 
 // Construir a query
-$sqlQuery="INSERT INTO clientes.transferencias (nome_destinatario,numero_conta,valor_transferir) VALUES ('$nome','$conta',$valor);";
-	
-// Fazer a query
-$result = $conn->query($sqlQuery);
+$stmt = $conn->prepare('INSERT INTO clientes.transferencias (nome_destinatario,numero_conta,valor_transferir) VALUES ( ?, ?, ?);');
+$stmt->bind_param('sss', $nome, $conta, $valor);
 
+$stmt->execute();
 
+$stmt->close();
 $conn -> close();
 
 ?>
