@@ -18,9 +18,9 @@ if (file_exists($envFile)) {
 }
 
 // se não foi enviado o parametro email, volta para a página de login
-if ( empty($_POST['email'] ) ) {
-  header('Location: index.html');
-  die();
+if ( empty($_SESSION['email'] ) ) {
+  //header('Location: index.html');
+  die("nao recebeu email");
 }
 
 // Parâmetros da ligação à base de dados MySQL (obtidos do .env)
@@ -32,8 +32,8 @@ $db = $_ENV['DB_NAME'];
 
 // se não foi enviado o parametro senha, ou a sessão não tem o email, volta para a página de login
 if ( empty($_POST['senha']) || empty($_SESSION['email']) ) {
-  header('Location: index.html');
-  die();
+  //header('Location: index.html');
+  die("nao recebeu senha nem email");
 }
 
 
@@ -63,7 +63,8 @@ $result = $stmt->get_result();
 // obtem a hash da senha do utilizador
 if ($result->num_rows == 0) {
   $conn -> close();
-  header('Location: index.html');
+  echo "Email nao encontrado " . $email;
+  //header('Location: index.html');
   die();  
 }
 
