@@ -8,12 +8,26 @@ error_reporting(E_ALL);
 // Iniciar a sessao
 session_start();
 
+// Carregar as variáveis do ficheiro .env
+$envFile = __DIR__ . '/.env';
+if (file_exists($envFile)) {
+  $env = parse_ini_file($envFile);
+  foreach ($env as $key => $value) {
+    $_ENV[$key] = $value;
+  }
+}
 
-// Parâmetros da ligação à base de dados MySQL
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "aluno123";
-$db = "clientes";
+// se não foi enviado o parametro email, volta para a página de login
+if ( empty($_POST['email'] ) ) {
+  header('Location: index.html');
+  die();
+}
+
+// Parâmetros da ligação à base de dados MySQL (obtidos do .env)
+$dbhost = $_ENV['DB_HOST'];
+$dbuser = $_ENV['DB_USER'];
+$dbpass = $_ENV['DB_PASS'];
+$db = $_ENV['DB_NAME'];
 
 
 // se não foi enviado o parametro senha, ou a sessão não tem o email, volta para a página de login

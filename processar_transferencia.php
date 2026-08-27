@@ -15,11 +15,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   }
 }
 
-// Parâmetros da ligação à base de dados MySQL
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "aluno123";
-$db = "clientes";
+// Carregar as variáveis do ficheiro .env
+$envFile = __DIR__ . '/.env';
+if (file_exists($envFile)) {
+  $env = parse_ini_file($envFile);
+  foreach ($env as $key => $value) {
+    $_ENV[$key] = $value;
+  }
+}
+
+// Parâmetros da ligação à base de dados MySQL (obtidos do .env)
+$dbhost = $_ENV['DB_HOST'];
+$dbuser = $_ENV['DB_USER'];
+$dbpass = $_ENV['DB_PASS'];
+$db = $_ENV['DB_NAME'];
 
 
 // se não está logado, volta para a página de login

@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  php:
+    image: php:8.1-apache
+    container_name: banko_php
+    ports:
+      - "8082:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASS=aluno123
+      - DB_NAME=clientes
+    depends_on:
+      - mysql
+    networks:
+      - banko_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: banko_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: aluno123
+      MYSQL_DATABASE: clientes
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - banko_network
+
+volumes:
+  mysql_data:
+
+networks:
+  banko_network:
+    driver: bridge
