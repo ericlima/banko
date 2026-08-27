@@ -35,9 +35,6 @@ $senha = mysqli_real_escape_string($conn, $_POST['senha']);
 // Extrair o email da sessão
 $email = $_SESSION['email'];
 
-$senha = htmlspecialchars($senha,ENT_QUOTES,'UTF-8');
-$email = htmlspecialchars($email,ENT_QUOTES,'UTF-8');
-
 // Construir a query
 $stmt = $conn->prepare('SELECT senha FROM clientes.utilizadores WHERE email= ? ;');
 $stmt->bind_param('s', $email);
